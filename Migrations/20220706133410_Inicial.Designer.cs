@@ -4,14 +4,16 @@ using Filmes.Dados;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Filmes.Migrations
 {
     [DbContext(typeof(AluraFilmesContexto))]
-    partial class AluraFilmesContextoModelSnapshot : ModelSnapshot
+    [Migration("20220706133410_Inicial")]
+    partial class Inicial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,41 +47,6 @@ namespace Filmes.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("actor");
-                });
-
-            modelBuilder.Entity("Filmes.Negocio.Filme", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("film_id")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AnoLancamento")
-                        .HasColumnType("varchar(4)")
-                        .HasColumnName("release_year");
-
-                    b.Property<string>("Descricao")
-                        .HasColumnType("text")
-                        .HasColumnName("description");
-
-                    b.Property<short>("Duracao")
-                        .HasColumnType("smallint")
-                        .HasColumnName("length");
-
-                    b.Property<string>("Titulo")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("title");
-
-                    b.Property<DateTime>("last_update")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("film");
                 });
 #pragma warning restore 612, 618
         }

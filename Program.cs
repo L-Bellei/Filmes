@@ -1,5 +1,8 @@
 ﻿using Filmes.Dados;
+using Filmes.Negocio;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Linq;
 
 namespace Filmes
 {
@@ -9,11 +12,25 @@ namespace Filmes
         {
             using (var context = new AluraFilmesContexto())
             {
-                foreach (var ator in context.Atores)
+                var atores = context.Atores.OrderByDescending(a => EF.Property<DateTime>(a, "last_update")).Take(10);
+
+                foreach (var item in atores)
                 {
-                    Console.WriteLine(ator);
+                    Console.WriteLine(item + " - " + context.Entry(item).Property("last_update").CurrentValue);
+                    Console.WriteLine();
                 }
-                    Console.ReadLine();
+
+                Console.WriteLine();
+
+                var filmes = context.Filmes.OrderByDescending(a => EF.Property<DateTime>(a, "last_update")).Take(10);
+
+                foreach (var item in filmes)
+                {
+                    Console.WriteLine(item + " - " + context.Entry(item).Property("last_update").CurrentValue);
+                    Console.WriteLine();
+                }
+
+                Console.ReadLine();
             }
         }
     }
