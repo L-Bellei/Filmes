@@ -4,14 +4,16 @@ using Filmes.Dados;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Filmes.Migrations
 {
     [DbContext(typeof(AluraFilmesContexto))]
-    partial class AluraFilmesContextoModelSnapshot : ModelSnapshot
+    [Migration("20220706174407_idiomas")]
+    partial class idiomas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,22 +74,12 @@ namespace Filmes.Migrations
                         .HasColumnType("varchar(255)")
                         .HasColumnName("title");
 
-                    b.Property<byte>("language_id")
-                        .HasColumnType("tinyint");
-
                     b.Property<DateTime>("last_update")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("getdate()");
 
-                    b.Property<byte?>("original_language_id")
-                        .HasColumnType("tinyint");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("language_id");
-
-                    b.HasIndex("original_language_id");
 
                     b.ToTable("film");
                 });
@@ -133,23 +125,6 @@ namespace Filmes.Migrations
                     b.ToTable("language");
                 });
 
-            modelBuilder.Entity("Filmes.Negocio.Filme", b =>
-                {
-                    b.HasOne("Filmes.Negocio.Idioma", "IdiomaFalado")
-                        .WithMany("FilmesFalados")
-                        .HasForeignKey("language_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Filmes.Negocio.Idioma", "IdiomaOriginal")
-                        .WithMany("FilmesOriginais")
-                        .HasForeignKey("original_language_id");
-
-                    b.Navigation("IdiomaFalado");
-
-                    b.Navigation("IdiomaOriginal");
-                });
-
             modelBuilder.Entity("Filmes.Negocio.FilmeAtor", b =>
                 {
                     b.HasOne("Filmes.Negocio.Ator", "Ator")
@@ -177,13 +152,6 @@ namespace Filmes.Migrations
             modelBuilder.Entity("Filmes.Negocio.Filme", b =>
                 {
                     b.Navigation("Atores");
-                });
-
-            modelBuilder.Entity("Filmes.Negocio.Idioma", b =>
-                {
-                    b.Navigation("FilmesFalados");
-
-                    b.Navigation("FilmesOriginais");
                 });
 #pragma warning restore 612, 618
         }

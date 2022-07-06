@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Filmes.Negocio
 {
@@ -13,10 +9,18 @@ namespace Filmes.Negocio
         public string Descricao { get; set; }
         public short Duracao { get; set; }
         public string AnoLancamento { get; set; }
+        public IList<FilmeAtor> Atores { get; set; }
+        public Idioma IdiomaFalado { get; set; }
+        public Idioma IdiomaOriginal { get; set; }
+
+        public Filme()
+        {
+            Atores = new List<FilmeAtor>();
+        }
 
         public override string ToString()
         {
-            return $"Filme ({Id}) : {Titulo} \n {Descricao} \n {Duracao} \n {AnoLancamento}";
+            return $"Filme ({Id}) : {Titulo} - {Duracao} - {AnoLancamento}";
         }
 
     }
