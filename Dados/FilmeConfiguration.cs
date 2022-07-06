@@ -56,8 +56,6 @@ namespace Filmes.Dados
               .HasOne(f => f.IdiomaOriginal)
               .WithMany(i => i.FilmesOriginais)
               .HasForeignKey("original_language_id");
-
-
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Filmes.Dados
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
-                .UseSqlServer(@"Data Source=LAPTOP-RIO81TIC\SQLEXPRESS;Initial Catalog=FilmesTst;Integrated Security=True;
+                .UseSqlServer(@"Data Source=LAPTOP-RIO81TIC\SQLEXPRESS;Initial Catalog=AluraFilmes;Integrated Security=True;
                                         Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;
                                         MultiSubnetFailover=False");
         }
